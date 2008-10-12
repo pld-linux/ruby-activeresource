@@ -46,7 +46,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc CHANGELOG
+%doc CHANGELOG README
 %{ruby_rubylibdir}/active_resource.rb
 %{ruby_rubylibdir}/activeresource.rb
 %{ruby_rubylibdir}/active_resource
