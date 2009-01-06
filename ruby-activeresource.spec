@@ -1,19 +1,20 @@
 Summary:	Think Active Record for web resources
 Name:		ruby-ActiveResource
-Version:	2.0.4
+Version:	2.0.5
 Release:	1
 License:	Ruby-alike
-Source0:	http://rubyforge.org/frs/download.php/42551/activeresource-%{version}.tgz
-# Source0-md5:	99def882b19e7d98eb759a39e42333b4
+Source0:	http://rubyforge.org/frs/download.php/45365/activeresource-%{version}.tgz
+# Source0-md5:	bf2a16f62cc68a62a69d287485385cce
 Group:		Development/Languages
 URL:		http://rubyforge.org/projects/activeresource/
 BuildRequires:	rpmbuild(macros) >= 1.277
+BuildRequires:	ruby >= 1:1.8.6
 BuildRequires:	ruby-modules
 %{?ruby_mod_ver_requires_eq}
 #BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-# nothing to be placed there. we're not noarc only because of ruby packaging
+# nothing to be placed there. we're not noarch only because of ruby packaging
 %define		_enable_debug_packages	0
 
 %description
@@ -23,6 +24,7 @@ XML over REST.
 %package rdoc
 Summary:	Documentation files for ActiveResource
 Group:		Documentation
+Requires:	ruby >= 1:1.8.7-4
 
 %description rdoc
 Documentation files for ActiveResource.
@@ -33,13 +35,14 @@ Documentation files for ActiveResource.
 %build
 rdoc --ri --op ri lib
 rdoc --op rdoc lib
-%{__rm} -f ri/created.rid
+rm -f ri/created.rid
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{ruby_rubylibdir},%{ruby_ridir}}
+install -d $RPM_BUILD_ROOT{%{ruby_rubylibdir},%{ruby_ridir},%{ruby_rdocdir}}
 cp -a lib/* $RPM_BUILD_ROOT%{ruby_rubylibdir}
 cp -a ri/* $RPM_BUILD_ROOT%{ruby_ridir}
+cp -a rdoc $RPM_BUILD_ROOT%{ruby_rdocdir}/%{name}-%{version}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -53,4 +56,5 @@ rm -rf $RPM_BUILD_ROOT
 
 %files rdoc
 %defattr(644,root,root,755)
-%{ruby_ridir}/ri/ActiveResource
+%{ruby_rdocdir}/%{name}-%{version}
+%{ruby_ridir}/ActiveResource
