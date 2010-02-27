@@ -13,6 +13,7 @@ BuildRequires:	ruby >= 1:1.8.6
 BuildRequires:	ruby-modules
 %{?ruby_mod_ver_requires_eq}
 Obsoletes:	ruby-ActiveResource
+Provides:	ruby-ActiveResource
 #BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
