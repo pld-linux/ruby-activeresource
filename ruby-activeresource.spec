@@ -1,9 +1,10 @@
+%define pkgname activeresource
 Summary:	Think Active Record for web resources
-Name:		ruby-ActiveResource
+Name:		ruby-%{pkgname}
 Version:	2.0.5
 Release:	1
 License:	Ruby-alike
-Source0:	http://rubyforge.org/frs/download.php/45365/activeresource-%{version}.tgz
+Source0:	http://rubyforge.org/frs/download.php/45365/%{pkgname}-%{version}.tgz
 # Source0-md5:	bf2a16f62cc68a62a69d287485385cce
 Group:		Development/Languages
 URL:		http://rubyforge.org/projects/activeresource/
@@ -11,6 +12,7 @@ BuildRequires:	rpmbuild(macros) >= 1.277
 BuildRequires:	ruby >= 1:1.8.6
 BuildRequires:	ruby-modules
 %{?ruby_mod_ver_requires_eq}
+Obsoletes:	ruby-ActiveResource
 #BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -42,7 +44,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{ruby_rubylibdir},%{ruby_ridir},%{ruby_rdocdir}}
 cp -a lib/* $RPM_BUILD_ROOT%{ruby_rubylibdir}
 cp -a ri/* $RPM_BUILD_ROOT%{ruby_ridir}
-cp -a rdoc $RPM_BUILD_ROOT%{ruby_rdocdir}/%{name}-%{version}
+cp -a rdoc $RPM_BUILD_ROOT%{ruby_rdocdir}/%{pkgname}-%{version}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -56,5 +58,5 @@ rm -rf $RPM_BUILD_ROOT
 
 %files rdoc
 %defattr(644,root,root,755)
-%{ruby_rdocdir}/%{name}-%{version}
+%{ruby_rdocdir}/%{pkgname}-%{version}
 %{ruby_ridir}/ActiveResource
