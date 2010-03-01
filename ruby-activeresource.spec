@@ -1,11 +1,11 @@
 %define pkgname activeresource
 Summary:	Think Active Record for web resources
 Name:		ruby-%{pkgname}
-Version:	2.0.5
+Version:	2.3.5
 Release:	1
 License:	Ruby-alike
-Source0:	http://rubyforge.org/frs/download.php/45365/%{pkgname}-%{version}.tgz
-# Source0-md5:	bf2a16f62cc68a62a69d287485385cce
+Source0:	http://rubygems.org/downloads/%{pkgname}-%{version}.gem
+# Source0-md5:	d66534fe7c40498d6fa7229122f74f23
 Group:		Development/Languages
 URL:		http://rubyforge.org/projects/activeresource/
 BuildRequires:	rpmbuild(macros) >= 1.277
@@ -33,7 +33,9 @@ Requires:	ruby >= 1:1.8.7-4
 Documentation files for ActiveResource.
 
 %prep
-%setup -q -n activeresource-%{version}
+%setup -q -c
+%{__tar} xf %{SOURCE0} -O data.tar.gz | %{__tar} xz
+find -newer README  -o -print | xargs touch --reference %{SOURCE0}
 
 %build
 rdoc --ri --op ri lib
@@ -43,6 +45,7 @@ rm -f ri/created.rid
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{ruby_rubylibdir},%{ruby_ridir},%{ruby_rdocdir}}
+
 cp -a lib/* $RPM_BUILD_ROOT%{ruby_rubylibdir}
 cp -a ri/* $RPM_BUILD_ROOT%{ruby_ridir}
 cp -a rdoc $RPM_BUILD_ROOT%{ruby_rdocdir}/%{pkgname}-%{version}
