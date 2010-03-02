@@ -8,7 +8,7 @@ Source0:	http://rubygems.org/downloads/%{pkgname}-%{version}.gem
 # Source0-md5:	d66534fe7c40498d6fa7229122f74f23
 Group:		Development/Languages
 URL:		http://rubyforge.org/projects/activeresource/
-BuildRequires:	rpmbuild(macros) >= 1.277
+BuildRequires:	rpmbuild(macros) >= 1.484
 BuildRequires:	ruby >= 1:1.8.6
 BuildRequires:	ruby-modules
 %{?ruby_mod_ver_requires_eq}
@@ -32,6 +32,18 @@ Requires:	ruby >= 1:1.8.7-4
 %description rdoc
 Documentation files for ActiveResource.
 
+%package ri
+Summary:	ri documentation for %{pkgname}
+Summary(pl.UTF-8):	Dokumentacja w formacie ri dla %{pkgname}
+Group:		Documentation
+Requires:	ruby
+
+%description ri
+ri documentation for %{pkgname}.
+
+%description ri -l pl.UTF-8
+Dokumentacji w formacie ri dla %{pkgname}.
+
 %prep
 %setup -q -c
 %{__tar} xf %{SOURCE0} -O data.tar.gz | %{__tar} xz
@@ -40,7 +52,7 @@ find -newer README  -o -print | xargs touch --reference %{SOURCE0}
 %build
 rdoc --ri --op ri lib
 rdoc --op rdoc lib
-rm -f ri/created.rid
+rm ri/created.rid
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -63,4 +75,7 @@ rm -rf $RPM_BUILD_ROOT
 %files rdoc
 %defattr(644,root,root,755)
 %{ruby_rdocdir}/%{pkgname}-%{version}
+
+%files ri
+%defattr(644,root,root,755)
 %{ruby_ridir}/ActiveResource
