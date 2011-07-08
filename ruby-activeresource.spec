@@ -1,11 +1,11 @@
 %define pkgname activeresource
 Summary:	Think Active Record for web resources
 Name:		ruby-%{pkgname}
-Version:	2.3.5
+Version:	2.3.11
 Release:	1
 License:	Ruby-alike
 Source0:	http://rubygems.org/downloads/%{pkgname}-%{version}.gem
-# Source0-md5:	d66534fe7c40498d6fa7229122f74f23
+# Source0-md5:	1db8bd1a5daa398c84052fe3662d3edb
 Group:		Development/Languages
 URL:		http://rubyforge.org/projects/activeresource/
 BuildRequires:	rpmbuild(macros) >= 1.484
