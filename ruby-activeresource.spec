@@ -2,7 +2,7 @@
 Summary:	Think Active Record for web resources
 Name:		ruby-%{pkgname}
 Version:	2.3.16
-Release:	1
+Release:	2
 License:	Ruby-alike
 Source0:	http://rubygems.org/downloads/%{pkgname}-%{version}.gem
 # Source0-md5:	2af4f9dd5a65dc1abef99eb7e0bfff68
