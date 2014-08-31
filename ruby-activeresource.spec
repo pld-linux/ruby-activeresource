@@ -1,11 +1,11 @@
 %define pkgname activeresource
 Summary:	Think Active Record for web resources
 Name:		ruby-%{pkgname}
-Version:	2.3.16
-Release:	2
+Version:	3.2.19
+Release:	1
 License:	Ruby-alike
 Source0:	http://rubygems.org/downloads/%{pkgname}-%{version}.gem
-# Source0-md5:	2af4f9dd5a65dc1abef99eb7e0bfff68
+# Source0-md5:	3e28dbff0e0ad92ec026abe23bfbec17
 Group:		Development/Languages
 URL:		http://rubyforge.org/projects/activeresource/
 BuildRequires:	rpmbuild(macros) >= 1.484
@@ -45,11 +45,12 @@ ri documentation for %{pkgname}.
 Dokumentacji w formacie ri dla %{pkgname}.
 
 %prep
-%setup -q -c
-%{__tar} xf %{SOURCE0} -O data.tar.gz | %{__tar} xz
-find -newer README  -o -print | xargs touch --reference %{SOURCE0}
+%setup -q -n %{pkgname}-%{version}
 
 %build
+# write .gemspec
+%__gem_helper spec
+
 rdoc --ri --op ri lib
 rdoc --op rdoc lib
 rm ri/created.rid
@@ -62,15 +63,19 @@ cp -a lib/* $RPM_BUILD_ROOT%{ruby_rubylibdir}
 cp -a ri/* $RPM_BUILD_ROOT%{ruby_ridir}
 cp -a rdoc $RPM_BUILD_ROOT%{ruby_rdocdir}/%{pkgname}-%{version}
 
+# install gemspec
+install -d $RPM_BUILD_ROOT%{ruby_specdir}
+cp -p %{pkgname}-%{version}.gemspec $RPM_BUILD_ROOT%{ruby_specdir}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc CHANGELOG README
+%doc CHANGELOG.md README.rdoc
 %{ruby_rubylibdir}/active_resource.rb
-%{ruby_rubylibdir}/activeresource.rb
 %{ruby_rubylibdir}/active_resource
+%{ruby_specdir}/%{pkgname}-%{version}.gemspec
 
 %files rdoc
 %defattr(644,root,root,755)
