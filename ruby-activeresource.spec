@@ -1,15 +1,18 @@
 %define pkgname activeresource
 Summary:	Think Active Record for web resources
 Name:		ruby-%{pkgname}
-Version:	3.2.19
-Release:	5
-License:	Ruby-alike
-Source0:	http://rubygems.org/downloads/%{pkgname}-%{version}.gem
-# Source0-md5:	3e28dbff0e0ad92ec026abe23bfbec17
+Version:	6.2.0
+Release:	1
+License:	MIT
 Group:		Development/Languages
-URL:		http://rubyforge.org/projects/activeresource/
+Source0:	https://rubygems.org/downloads/%{pkgname}-%{version}.gem
+# Source0-md5:	7b0de1613a561da41fb461082f593684
+URL:		https://rubyonrails.org
 BuildRequires:	rpm-rubyprov
 BuildRequires:	rpmbuild(macros) >= 1.665
+Requires:	ruby-activemodel >= 7.0
+Requires:	ruby-activemodel-serializers-xml >= 1.0
+Requires:	ruby-activesupport >= 7.0
 Provides:	ruby-ActiveResource
 Obsoletes:	ruby-ActiveResource
 BuildArch:	noarch
@@ -68,9 +71,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc CHANGELOG.md README.rdoc
+%doc MIT-LICENSE README.md
 %{ruby_vendorlibdir}/active_resource.rb
 %{ruby_vendorlibdir}/active_resource
+%{ruby_vendorlibdir}/activeresource.rb
 %{ruby_specdir}/%{pkgname}-%{version}.gemspec
 
 %files rdoc
@@ -80,3 +84,4 @@ rm -rf $RPM_BUILD_ROOT
 %files ri
 %defattr(644,root,root,755)
 %{ruby_ridir}/ActiveResource
+%{ruby_ridir}/ThreadsafeAttributes
